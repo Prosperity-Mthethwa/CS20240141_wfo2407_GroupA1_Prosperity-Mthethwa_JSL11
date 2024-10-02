@@ -63,9 +63,9 @@ const elements = {
   cancelEditBtn: document.getElementById("cancel-edit-btn"),
   deleteTaskBtn: document.getElementById("delete-task-btn"),
 
-
-
-}
+  //filter//
+  filterDiv: document.getElementById("filterDiv"),
+};
 
 let activeBoard = ""
 
