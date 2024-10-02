@@ -77,7 +77,7 @@ function fetchAndDisplayBoardsAndTasks() {
   displayBoards(boards);
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
-    activeBoard = localStorageBoard ? localStorageBoard ;  boards[0]; 
+    activeBoard = localStorageBoard ? localStorageBoard :  boards[0]; //removed semi-colon(bug 1)
     elements.headerBoardName.textContent = activeBoard
     styleActiveBoard(activeBoard)
     refreshTasksUI();
@@ -88,18 +88,18 @@ function fetchAndDisplayBoardsAndTasks() {
 // TASK: Fix Bugs
 function displayBoards(boards) {
   const boardsContainer = document.getElementById("boards-nav-links-div");
-  boardsContainer.innerHTML = ''; // Clears the container
+  boardsContainer.innerHTML = ""; // Clears the container
   boards.forEach(board => {
     const boardElement = document.createElement("button");
     boardElement.textContent = board;
     boardElement.classList.add("board-btn");
-    boardElement.click()  { 
+    boardElement.addEventListener("click", () => { 
       elements.headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board //assigns active board
       localStorage.setItem("activeBoard", JSON.stringify(activeBoard))
       styleActiveBoard(activeBoard)
-    };
+    }); //added event listener on "click"//
     boardsContainer.appendChild(boardElement);
   });
 
