@@ -137,7 +137,7 @@ function filterAndDisplayTasksByBoard(boardName) {
       // Listen for a click event on each task and open a modal
       taskElement.addEventListener("click",() => { 
         openEditTaskModal(task);
-      });
+      }); //added event listener//
 
       tasksContainer.appendChild(taskElement);
     });
@@ -152,37 +152,40 @@ function refreshTasksUI() {
 // Styles the active board by adding an active class
 // TASK: Fix Bugs
 function styleActiveBoard(boardName) {
-  document.querySelectorAll('.board-btn').foreach(btn => { 
-    
+  document.querySelectorAll('.board-btn').forEach(btn => { 
+    //fixed camelCase for.Each//
     if(btn.textContent === boardName) {
-      btn.add('active') 
+      btn.classList.add('active') //added btn.classList.add for adding classes//
     }
     else {
-      btn.remove('active'); 
+      btn.classList.remove('active'); //classlist for removing classes//
     }
   });
 }
 
 
 function addTaskToUI(task) {
-  const column = document.querySelector('.column-div[data-status="${task.status}"]'); 
+  const column = document.querySelector(
+    '.column-div[data-status="${task.status}"]'); 
+
   if (!column) {
     console.error(`Column not found for status: ${task.status}`);
     return;
   }
 
-  let tasksContainer = column.querySelector('.tasks-container');
+  let tasksContainer = column.querySelector(".tasks-container");
   if (!tasksContainer) {
-    console.warn(`Tasks container not found for status: ${task.status}, creating one.`);
-    tasksContainer = document.createElement('div');
-    tasksContainer.className = 'tasks-container';
+    console.warn(
+      `Tasks container not found for status: ${task.status}, creating one.`);
+    tasksContainer = document.createElement("div");
+    tasksContainer.className = "tasks-container";
     column.appendChild(tasksContainer);
   }
 
-  const taskElement = document.createElement('div');
-  taskElement.className = 'task-div';
+  const taskElement = document.createElement("div");
+  taskElement.className = "task-div";
   taskElement.textContent = task.title; // Modify as needed
-  taskElement.setAttribute('data-task-id', task.id);
+  taskElement.setAttribute("data-task-id", task.id);
   
   tasksContainer.appendChild(); 
 }
@@ -192,7 +195,7 @@ function addTaskToUI(task) {
 function setupEventListeners() {
   // Cancel editing task event listener
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  cancelEditBtn.click() => toggleModal(false, elements.editTaskModal));
+  cancelEditBtn.addEventListener("click", () => toggleModal(false, elements.editTaskModal));
 
   // Cancel adding new task event listener
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
