@@ -38,6 +38,23 @@ const elements = {
   addNewTaskBtn: document.getElementById("add-new-task-btn"),
   editBoardBtn: document.getElementById("edit-board-btn"),
 
+  //Task columns//
+  columnDivs: document.querySelectorAll(".column-div"),
+  todoColumn: document.querySelector('.column-div[data-status="todo"]'),
+  doingColumn: document.querySelector('.column-div[data-status="doing"]'),
+  doneColumn: document.querySelector('.column-div[data-status="done"]'),
+  filterDiv: document.getElementById("filterDiv"),
+
+  //New Task Modal//
+  titleInput: document.getElementById("title-input"),
+  descInput: document.getElementById("desc-input"),
+  selectStatus: document.getElementById("select-status"),
+  createNewTaskBtn: document.getElementById("add-new-task-btn"),
+  cancelAddTaskBtn: document.getElementById("cancel-add-task-btn"),
+  newTaskModal: document.getElementById("new-task-modal-window"),
+  modalWindow: document.getElementById("new-task-modal-window"),
+
+
 
 }
 
