@@ -232,7 +232,7 @@ function setupEventListeners() {
 // Toggles tasks modal
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? "block" : "none";  //fixed ternary operator syntsx//
+  modal.style.display = show ? "block" : "none";  //fixed ternary operator syntax//
 }
 
 /*************************************************************************************************************************************************
@@ -244,14 +244,23 @@ function addTask(event) {
 
   //Assign user input to the task object
     const task = {
-      
+      title: document.getElementById("title-input").value,
+      description: document.getElementById("desc-input").value,
+      status: document.getElementById("select-status").value,
+      board: activeBoard, 
     };
+    
     const newTask = createNewTask(task);
     if (newTask) {
       addTaskToUI(newTask);
       toggleModal(false);
       elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
       event.target.reset();
+
+      initialData.push(newTask);
+      initialData.pop();
+      localStorage.setItem("tasks", JSON.stringify(initialData));
+      //putTask(newTask);
       refreshTasksUI();
     }
 }
