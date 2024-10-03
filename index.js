@@ -286,14 +286,29 @@ function toggleTheme() {
 
   // Toggle between light and dark theme classes on the body
   body.classList.toggle("light-theme");
-  body.classList.toggle("dark-theme");
+  if (body.classList.contains("light-theme")) {
+    logo.src = "./assets/logo-light.svg";
+  } else {
+    logo.src = "./assets/logo-dark.svg";
+  }
 
-  // Check if the current theme is light or dark
-  const isLightTheme = body.classList.contains("light-theme");
+  localStorage.setItem("light-theme", body.classList.contains("light-theme") ? "enabled" : "disabled");
+  }
 
-  // Store the theme preference in local storage using ternary operator
-  localStorage.setItem("theme", isLightTheme ? "light" : "dark");
+//Function to set initial theme based on store preference
+function setInitialTheme() {
+  const logo = document.getElementById("logo");
+  if (localStorage.getItem("light-theme") === "enabled") {
+    document.body.classList.add("light-theme");
+    logo.src = "./assets/logo-light.svg";
+    document.getElementById("switch").checked = true;
+  } else {
+    logo.src = "./assets/logo-dark.svg";
+  }
 }
+
+// Call setInitialTheme when the page loads
+document.addEventListener("DOMContentLoaded", setInitialTheme);
 
 //Function 11
 function openEditTaskModal(task) {
