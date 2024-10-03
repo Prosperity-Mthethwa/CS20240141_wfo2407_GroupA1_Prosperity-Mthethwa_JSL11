@@ -267,30 +267,65 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
- 
+  if (show) {
+    elements.sideBar.style.display = "flex"; // Display the sidebar as flex layout
+    elements.showSideBarBtn.style.display = "none";
+  } else {
+    elements.sideBar.style.display = "none"; 
+    elements.showSideBarBtn.style.display = "block";
+  }
 }
 
+toggleSidebar(true); 
+
 function toggleTheme() {
- 
+  // Get a reference to the document body
+  const body = document.body;
+
+  // Toggle between light and dark theme classes on the body
+  body.classList.toggle("light-theme");
+  body.classList.toggle("dark-theme");
+
+  // Check if the current theme is light or dark
+  const isLightTheme = body.classList.contains("light-theme");
+
+  // Store the theme preference in local storage using ternary operator
+  localStorage.setItem("theme", isLightTheme ? "light" : "dark");
 }
 
 
 
 function openEditTaskModal(task) {
-  // Set task details in modal inputs
-  
+
+  const titleInput = document.getElementById("edit-task-title-input");
+  const descInput = document.getElementById("edit-task-desc-input");
+  const statusSelect = document.getElementById("edit-select-status");
 
   // Get button elements from the task modal
-
+  titleInput.value = task.title;
+  descInput.value = task.description;
+  statusSelect.value = task.status;
 
   // Call saveTaskChanges upon click of Save Changes button
- 
+  const saveTaskChangesBtn = document.getElementById("save-task-changes-btn");
+  const deleteTaskBtn = document.getElementById("delete-task-btn");
+
+  saveTaskChangesBtn.addEventListener("click", () => {
+    saveTaskChanges(task.id);
+    refreshTasksUI();
+    toggleModal(false, elements.editTaskModal);
+  });
 
   // Delete task using a helper function and close the task modal
-
-
+  deleteTaskBtn.addEventListener("click", () => {
+    deleteTask(task.id);
+    // No need to reload the page, just refresh the UI
+    refreshTasksUI();
+    toggleModal(false, elements.editTaskModal);
+  });
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
+
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
