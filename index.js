@@ -233,7 +233,7 @@ function setupEventListeners() {
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
   modal.style.display = show ? "block" : "none";  //fixed ternary operator syntax//
-}
+};
 
 /*************************************************************************************************************************************************
  * COMPLETE FUNCTION CODE
@@ -255,16 +255,16 @@ function addTask(event) {
   if (newTask) {
     addTaskToUI(newTask);
     toggleModal(false);
-    /*newTask.board = activeBoard;
-    initialData.push(newTask);*/
+    /*newTask.board = activeBoard;*/
+    initialData.push(newTask);
     elements.filterDiv.style.display = "none"; // Also hide the filter overlay
     event.target.reset();
 
     /*initialData.push(newTask);
-    initialData.pop();
-    localStorage.setItem("tasks", JSON.stringify(initialData));*/
+    initialData.pop();*/
+    /*localStorage.setItem("tasks", JSON.stringify(initialData));*/
     putTask(newTask);
-    /*refreshTasksUI();*/
+    refreshTasksUI();
   }
 }
 //Function 9
@@ -372,6 +372,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function init() {
+  initializeData();
   setupEventListeners();
   const showSidebar = localStorage.getItem("showSideBar") === "true";
   toggleSidebar(showSidebar);
